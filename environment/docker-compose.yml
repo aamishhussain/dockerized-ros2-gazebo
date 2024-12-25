@@ -1,0 +1,23 @@
+version: '3.9' # Specify the Compose file format version
+
+name: sim
+services:
+  ros2-gazebo:
+    image: ros2-gazebo-new
+    stdin_open: true # Equivalent to -i
+    tty: true        # Equivalent to -t
+    build:
+      context: . # Directory where the Dockerfile is located
+      dockerfile: Dockerfile 
+    volumes:
+      - /home/aamish/ros2_gazebo_docker/ws_ros2_gazebo:/ws_ros2_gazebo
+      - /tmp/.X11-unix:/tmp/.X11-unix 
+      - /mnt/wslg:/mnt/wslg
+    
+    environment:
+      - FLASK_ENV=development # Example of setting environment variables
+      - DISPLAY 
+      - WAYLAND_DISPLAY 
+      - eXDG_RUNTIME_DIR
+      - PULSE_SERVER
+
